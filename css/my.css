@@ -1,0 +1,95 @@
+@font-face {
+  font-family: ZhuZiAWan;
+  src: url("https://cdn.jsdelivr.net/gh/ttiverson3/cdn@1.0.0/fonts/ZhuZiAWan.woff2");
+  font-display: swap;
+  font-weight: lighter;
+}
+@font-face {
+  font-family: Candyhome;
+  src: url("https://cdn.jsdelivr.net/gh/ttiverson3/cdn@1.0.0/fonts/Candyhome.ttf");
+  font-display: swap;
+  font-weight: lighter;
+}
+@font-face {
+  font-family: JetbrainsMono;
+  src: url("https://cdn.jsdelivr.net/npm/jetbrains-mono/fonts/webfonts/JetBrainsMono-Medium.woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: CY;
+  src: url("https://cdn.jsdelivr.net/gh/ttiverson3/cdn@1.0.0/fonts/ChenYuluoyan-Thin-Monospaced.ttf");
+  font-display: swap;
+}
+h1#site-title {
+  font-family: Candyhome;
+  font-size: 3em !important;
+}
+a.article-title,
+a.blog-slider__title,
+a.categoryBar-list-link,
+h1.post-title {
+  font-family: CY;
+  font-size: 3em !important;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: ZhuZiAWan;
+}
+body,
+.gitcalendar {
+  font-family: ZhuZiAWan !important;
+}
+/*3s为加载动画的时间，1为加载动画的次数，ease-in-out为动画效果*/
+#page-header,
+#web_bg {
+  -webkit-animation: imgblur 2s 1 ease-in-out;
+  animation: imgblur 2s 1 ease-in-out;
+}
+/*适配使用-webkit内核的浏览器 */
+@-webkit-keyframes imgblur {
+  0% {
+    -webkit-filter: blur(5px);
+  }
+  100% {
+    -webkit-filter: blur(0px);
+  }
+}
+.table-wrap img {
+  margin: 0.6rem auto 0.1rem !important;
+}
+@-moz-keyframes imgblur {
+  0% {
+    filter: blur(5px);
+  }
+  100% {
+    filter: blur(0px);
+  }
+}
+@-webkit-keyframes imgblur {
+  0% {
+    filter: blur(5px);
+  }
+  100% {
+    filter: blur(0px);
+  }
+}
+@-o-keyframes imgblur {
+  0% {
+    filter: blur(5px);
+  }
+  100% {
+    filter: blur(0px);
+  }
+}
+@keyframes imgblur {
+  0% {
+    filter: blur(5px);
+  }
+  100% {
+    filter: blur(0px);
+  }
+}
