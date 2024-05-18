@@ -1,0 +1,160 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>自動化安裝 LAMP | Gary's Blog</title><meta name="keywords" content="Ubuntu,LAMP,Shell Script"><meta name="author" content="Gary"><meta name="copyright" content="Gary"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="What are LAMP and Shell Script LAMP 通常指的是 Linux, Apache, MySQL, PHP 用來開發 web 應用的組合包。 Shell Script 是一份純文字檔，可以將多個指令寫在一起再一次執行，來達到自動化的目的。  Automatic LAMP installation with Shell Script在 Ubuntu 22.04 一鍵安裝">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自動化安裝 LAMP">
+<meta property="og:url" content="https://blog.garyhuang.tw/posts/34acd922/index.html">
+<meta property="og:site_name" content="Gary&#39;s Blog">
+<meta property="og:description" content="What are LAMP and Shell Script LAMP 通常指的是 Linux, Apache, MySQL, PHP 用來開發 web 應用的組合包。 Shell Script 是一份純文字檔，可以將多個指令寫在一起再一次執行，來達到自動化的目的。  Automatic LAMP installation with Shell Script在 Ubuntu 22.04 一鍵安裝">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://images.unsplash.com/photo-1560170505-43f55e57739d?q=80&w=1974&auto=format&fit=crop">
+<meta property="article:published_time" content="2023-12-04T09:31:48.000Z">
+<meta property="article:modified_time" content="2024-02-04T05:29:50.486Z">
+<meta property="article:author" content="Gary">
+<meta property="article:tag" content="Ubuntu">
+<meta property="article:tag" content="LAMP">
+<meta property="article:tag" content="Shell Script">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1560170505-43f55e57739d?q=80&w=1974&auto=format&fit=crop"><link rel="shortcut icon" href="/"><link rel="canonical" href="https://blog.garyhuang.tw/posts/34acd922/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '自動化安裝 LAMP',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-04 13:29:50'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/my.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://firebasestorage.googleapis.com/v0/b/hexo-blog-files.appspot.com/o/personal_data%2FIMG_2471.JPG?alt=media&amp;token=c27d596f-10f5-4d55-88ee-92e5352afcbe" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">12</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fa-solid fa-images"></i><span> Gallery</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Gary's Blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fa-solid fa-images"></i><span> Gallery</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">自動化安裝 LAMP</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-12-04T09:31:48.000Z" title="Created 2023-12-04 17:31:48">2023-12-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-02-04T05:29:50.486Z" title="Updated 2024-02-04 13:29:50">2024-02-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Development/">Development</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Development/Shell-Script/">Shell Script</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="自動化安裝 LAMP"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h2 id="What-are-LAMP-and-Shell-Script"><a href="#What-are-LAMP-and-Shell-Script" class="headerlink" title="What are LAMP and Shell Script"></a>What are LAMP and Shell Script</h2><ol>
+<li>LAMP 通常指的是 <strong>L</strong>inux, <strong>A</strong>pache, <strong>M</strong>ySQL, <strong>P</strong>HP 用來開發 web 應用的組合包。</li>
+<li>Shell Script 是一份純文字檔，可以將多個指令寫在一起再一次執行，來達到自動化的目的。</li>
+</ol>
+<h2 id="Automatic-LAMP-installation-with-Shell-Script"><a href="#Automatic-LAMP-installation-with-Shell-Script" class="headerlink" title="Automatic LAMP installation with Shell Script"></a>Automatic LAMP installation with Shell Script</h2><p>在 Ubuntu 22.04 一鍵安裝 LAMP + phpMyAdmin<br>在安裝過程中，有時候要手動輸入密碼，這時使用 <code>debconf-set-selections</code> 能預先定義好設定值，來避免手動配置。<br>基本使用方法: <code>echo &quot;package-name configuration-key type value&quot; | sudo debconf-set-selections</code></p>
+<ol>
+<li><p>配置 instal_lamp.sh</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">sudo apt update &amp;&amp; sudo apt upgrade -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># Set MySQL root password</span></span><br><span class="line">MYSQL_ROOT_PASSWORD=root</span><br><span class="line"></span><br><span class="line"><span class="comment"># Set phpMyAdmin password</span></span><br><span class="line">PHPMYADMIN_PASSWORD=root</span><br><span class="line"></span><br><span class="line"><span class="comment"># Set debconf selections for MySQL</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;mysql-server mysql-server/root_password password <span class="variable">$MYSQL_ROOT_PASSWORD</span>&quot;</span> | sudo debconf-set-selections</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;mysql-server mysql-server/root_password_again password <span class="variable">$MYSQL_ROOT_PASSWORD</span>&quot;</span> | sudo debconf-set-selections</span><br><span class="line"></span><br><span class="line"><span class="comment"># Install LAMP stack</span></span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install -y apache2 apache2-utils libapache2-mod-php</span><br><span class="line">sudo apt install -y mysql-server</span><br><span class="line">sudo apt install -y php php-mysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># Install PhpMyAdmin</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;phpmyadmin phpmyadmin/dbconfig-install boolean true&quot;</span> | sudo debconf-set-selections</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;phpmyadmin phpmyadmin/app-password-confirm password <span class="variable">$PHPMYADMIN_PASSWORD</span>&quot;</span> | sudo debconf-set-selections</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;phpmyadmin phpmyadmin/mysql/admin-pass password <span class="variable">$MYSQL_ROOT_PASSWORD</span>&quot;</span> | sudo debconf-set-selections</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;phpmyadmin phpmyadmin/mysql/app-pass password <span class="variable">$PHPMYADMIN_PASSWORD</span>&quot;</span> | sudo debconf-set-selections</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2&quot;</span> | sudo debconf-set-selections</span><br><span class="line"></span><br><span class="line">sudo apt install -y phpmyadmin</span><br><span class="line"></span><br><span class="line"><span class="comment"># Set Apache2 configuration path</span></span><br><span class="line">PHPMYADMIN_APACHE_CONF=/etc/apache2/sites-available/phpmyadmin.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Include /etc/phpmyadmin/apache.conf&quot;</span> | sudo <span class="built_in">tee</span> -a <span class="variable">$PHPMYADMIN_APACHE_CONF</span></span><br><span class="line">sudo a2ensite phpmyadmin.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># Restart Apache</span></span><br><span class="line">sudo service apache2 restart</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>執行 install_lamp.sh</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">chmod</span> +x install_lamp.sh</span><br><span class="line">sh install_lamp.sh</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a target="_blank" rel="noopener" href="https://linux.vbird.org/linux_basic/centos7/0340bashshell-scripts.php">https://linux.vbird.org/linux_basic/centos7/0340bashshell-scripts.php</a><br><a target="_blank" rel="noopener" href="https://manpages.ubuntu.com/manpages/trusty/en/man1/debconf-set-selections.1.html">https://manpages.ubuntu.com/manpages/trusty/en/man1/debconf-set-selections.1.html</a><br><a target="_blank" rel="noopener" href="https://chat.openai.com/">ChatGPT</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://blog.garyhuang.tw">Gary</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://blog.garyhuang.tw/posts/34acd922/">https://blog.garyhuang.tw/posts/34acd922/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Ubuntu/">Ubuntu</a><a class="post-meta__tags" href="/tags/LAMP/">LAMP</a><a class="post-meta__tags" href="/tags/Shell-Script/">Shell Script</a></div><div class="post_share"><div class="social-share" data-image="https://images.unsplash.com/photo-1560170505-43f55e57739d?q=80&amp;w=1974&amp;auto=format&amp;fit=crop" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/1d1d5aac/"><img class="prev-cover" src="https://firebasestorage.googleapis.com/v0/b/hexo-blog-files.appspot.com/o/posts%2Fhttp-to-https%2F_11232664-1a90-4dbd-ad7d-c09aea7b1503.jpg?alt=media&amp;token=336c2567-8f1e-4b20-9ade-8b257dabc33b" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">HTTP 重新導向至 HTTPS</div></div></a></div><div class="next-post pull-right"><a href="/posts/195c6fc4/"><img class="next-cover" src="https://firebasestorage.googleapis.com/v0/b/hexo-blog-files.appspot.com/o/posts%2Fcodeigniter-redis%2Flogo.jpg?alt=media&amp;token=48f4d671-377d-4424-944c-0a65b9c8db0b" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">CodeIgniter 用 Redis 做資料快取</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/posts/745c7824/" title="Windows WSL 安裝 Ubuntu 及 Node.js"><img class="cover" src="https://firebasestorage.googleapis.com/v0/b/hexo-blog-files.appspot.com/o/posts%2Fdiscord-bot-1%2Fwsl-cover.png?alt=media&token=bfe52b1d-9ea3-45cb-9d90-10209a89dcc9" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-14</div><div class="title">Windows WSL 安裝 Ubuntu 及 Node.js</div></div></a></div><div><a href="/posts/7fbb1596/" title="Ubuntu 配置 Laravel + Laradock"><img class="cover" src="https://firebasestorage.googleapis.com/v0/b/hexo-blog-files.appspot.com/o/posts%2Flaravel-with-laradock%2Fcover.jpg?alt=media&token=a2e674a7-af97-4371-80e8-6fc83832bb90" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-06</div><div class="title">Ubuntu 配置 Laravel + Laradock</div></div></a></div><div><a href="/posts/1c7e5d4e/" title="Ubuntu 使用 SSMTP 透過 Gmail 發送電子郵件"><img class="cover" src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-02-18</div><div class="title">Ubuntu 使用 SSMTP 透過 Gmail 發送電子郵件</div></div></a></div><div><a href="/posts/a94e1c06/" title="Ubuntu 配置 Apache&#x2F;Nginx HTTPS server"><img class="cover" src="https://firebasestorage.googleapis.com/v0/b/hexo-blog-files.appspot.com/o/posts%2Fweb-server-https-setting%2Fwebserver.jpg?alt=media&token=220bfd4b-0d1d-4881-a189-b0910ed2c419" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-04</div><div class="title">Ubuntu 配置 Apache&#x2F;Nginx HTTPS server</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://firebasestorage.googleapis.com/v0/b/hexo-blog-files.appspot.com/o/personal_data%2FIMG_2471.JPG?alt=media&amp;token=c27d596f-10f5-4d55-88ee-92e5352afcbe" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gary</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">12</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/garyhuang03" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:gary@garyhuang.tw" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Welcome to my blog.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-are-LAMP-and-Shell-Script"><span class="toc-number">1.</span> <span class="toc-text">What are LAMP and Shell Script</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Automatic-LAMP-installation-with-Shell-Script"><span class="toc-number">2.</span> <span class="toc-text">Automatic LAMP installation with Shell Script</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">3.</span> <span class="toc-text">References</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/83f16766/" title="Linux cp 指令"><img src="https://firebasestorage.googleapis.com/v0/b/hexo-blog-files.appspot.com/o/posts%2F83f16766%2F_c66d3d35-bff0-491b-86bd-62c1b30d54cc.jpg?alt=media&amp;token=f5c4a6a2-a957-440a-ac9d-9e78bf38a783" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux cp 指令"/></a><div class="content"><a class="title" href="/posts/83f16766/" title="Linux cp 指令">Linux cp 指令</a><time datetime="2024-05-18T05:17:48.000Z" title="Created 2024-05-18 13:17:48">2024-05-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/1d1d5aac/" title="HTTP 重新導向至 HTTPS"><img src="https://firebasestorage.googleapis.com/v0/b/hexo-blog-files.appspot.com/o/posts%2Fhttp-to-https%2F_11232664-1a90-4dbd-ad7d-c09aea7b1503.jpg?alt=media&amp;token=336c2567-8f1e-4b20-9ade-8b257dabc33b" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="HTTP 重新導向至 HTTPS"/></a><div class="content"><a class="title" href="/posts/1d1d5aac/" title="HTTP 重新導向至 HTTPS">HTTP 重新導向至 HTTPS</a><time datetime="2024-03-28T10:17:04.000Z" title="Created 2024-03-28 18:17:04">2024-03-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/34acd922/" title="自動化安裝 LAMP"><img src="https://images.unsplash.com/photo-1560170505-43f55e57739d?q=80&amp;w=1974&amp;auto=format&amp;fit=crop" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="自動化安裝 LAMP"/></a><div class="content"><a class="title" href="/posts/34acd922/" title="自動化安裝 LAMP">自動化安裝 LAMP</a><time datetime="2023-12-04T09:31:48.000Z" title="Created 2023-12-04 17:31:48">2023-12-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/195c6fc4/" title="CodeIgniter 用 Redis 做資料快取"><img src="https://firebasestorage.googleapis.com/v0/b/hexo-blog-files.appspot.com/o/posts%2Fcodeigniter-redis%2Flogo.jpg?alt=media&amp;token=48f4d671-377d-4424-944c-0a65b9c8db0b" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CodeIgniter 用 Redis 做資料快取"/></a><div class="content"><a class="title" href="/posts/195c6fc4/" title="CodeIgniter 用 Redis 做資料快取">CodeIgniter 用 Redis 做資料快取</a><time datetime="2023-06-13T04:28:37.000Z" title="Created 2023-06-13 12:28:37">2023-06-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/29ce3640/" title="Laravel 存取 Google sheet"><img src="https://firebasestorage.googleapis.com/v0/b/hexo-blog-files.appspot.com/o/posts%2Flaravel-google-sheet%2Fcover.png?alt=media&amp;token=f03d06bb-156c-4ccb-940f-649dfc927142" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Laravel 存取 Google sheet"/></a><div class="content"><a class="title" href="/posts/29ce3640/" title="Laravel 存取 Google sheet">Laravel 存取 Google sheet</a><time datetime="2023-02-25T03:00:29.000Z" title="Created 2023-02-25 11:00:29">2023-02-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By Gary</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Switch Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script src="/js/my.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
